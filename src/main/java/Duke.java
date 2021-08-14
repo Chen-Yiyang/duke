@@ -1,20 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
+class Duke {
     // constants for special commands
     private static final String CMD_BYE = "bye";
+    private static final String CMD_LIST = "list";
+
+    // static fields
+    private static List<Task> tasks = new ArrayList<>();
 
     private static void displayGreetings() {
-        System.out.println("\t================================================");
         System.out.println("\tHello this is Yiyang-bot :D");
         System.out.println("\tWhat can I do for you?");
-        System.out.println("\t================================================");
     }
 
+    private static void displayList() {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(String.format("\t%d. %s",
+                    i+1, tasks.get(i)));
+        }
+    }
+
+
     private static void displayBye() {
-        System.out.println("\t================================================");
         System.out.println("\tBye. Hope to see you again.");
-        System.out.println("\t================================================");
     }
 
     public static void main(String[] args) {
@@ -24,9 +34,12 @@ public class Duke {
         String currCommand = sc.nextLine();
 
         while (!currCommand.equals(CMD_BYE)) {
-            System.out.println("\t================================================");
-            System.out.println("\t" + currCommand);
-            System.out.println("\t================================================");
+            if (currCommand.equals(CMD_LIST)) {
+                displayList();
+            } else {
+                tasks.add(new Task(currCommand));
+                System.out.println("\t added: " + currCommand);
+            }
 
             currCommand = sc.nextLine();
         }
