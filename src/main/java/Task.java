@@ -15,4 +15,8 @@ class Task {
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.name);
     }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
 }
